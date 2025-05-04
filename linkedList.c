@@ -68,13 +68,41 @@ void viewList(){
   }
 }
 
+void delete(value){
+	node *temp;
+	if(head == NULL){
+		printf("The list is empty!");
+	} else if(head->data == value){
+		head=head->next;
+	} else{
+		ptr=head;
+		while(ptr->next!=NULL){
+			temp=ptr;
+			ptr=ptr->next;
+			if(ptr->data==value){
+				temp->next = ptr->next;
+				return;
+			}else{
+				continue;
+			}
+		}
+	    printf("The intended value is not in the list!");
+	}
+}
+
+void search(value){
+	while(ptr!=NULL){
+		
+	}
+}
+
 
 void main(){
   bool choice=true;
   char input[50];
   char *command, *command2;
   int value,pos;
-  printf("Use following commands to interact with the linked list! Replace <value> with the value of the node you want to insert or delete \n To view the list: view\n To insert at the end: insert <value> \n To insert after a existing value: insert after <Existing Value> \n To delete a node: delete <value>");
+  printf("Use following commands to interact with the linked list! Replace <value> with the value of the node you want to insert or delete \n To view the list: view\n To insert at the end: insert <value> \n To insert after a existing value: insert after <Existing Value> \n To delete a node: delete <value> \n To exit the window: exit\n");
   
   
   //command parsing
@@ -95,11 +123,18 @@ void main(){
 		  	value=atoi(command2);
 		  	insert(value);
 		  }
-    } 
+    }
+    else if(strcmp(command,"delete")==0){
+    	value=atoi(strtok(NULL, " "));
+    	delete(value);
+	}
 	else if(strcmp(command,"exit")==0){
       printf("Goodbye!");
       choice = !choice;
     }
+    else{
+    	printf("Incorrect command! Please enter a valid one as instructed at the top!");
+	}
   }
 }
 
